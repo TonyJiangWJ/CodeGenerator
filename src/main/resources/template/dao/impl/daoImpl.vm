@@ -21,10 +21,10 @@ public class ${target.className}DAOImpl extends BaseDAO implements ${target.clas
     }
 
     @Override
-    public Long insert(${target.className} log) throws SQLException {
-        log.setCreateTime(new Date());
-        log.setModifyTime(new Date());
-        return (Long) getSqlMapClientTemplate().insert(getNamespace() + ".insert", log);
+    public Long insert(${target.className} ${target.lowerStartName}) throws SQLException {
+        ${target.lowerStartName}.setGmtCreate(new Date());
+        ${target.lowerStartName}.setGmtModify(new Date());
+        return (Long) getSqlMapClientTemplate().insert(getNamespace() + ".insert", ${target.lowerStartName});
     }
 
     @Override
@@ -33,8 +33,8 @@ public class ${target.className}DAOImpl extends BaseDAO implements ${target.clas
     }
 
     @Override
-    public Integer updateById(${target.className} log) throws SQLException {
-        return getSqlMapClientTemplate().update(getNamespace() + ".updateById", log);
+    public Integer updateById(${target.className} ${target.lowerStartName}) throws SQLException {
+        return getSqlMapClientTemplate().update(getNamespace() + ".updateById", ${target.lowerStartName});
     }
 
     @Override

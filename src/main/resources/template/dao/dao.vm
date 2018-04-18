@@ -10,7 +10,7 @@ import java.util.List;
 * @author $configParser.authorInfo
 */
 public interface ${target.className}DAO {
-    Long insert(${target.className} log) throws SQLException;
+    Long insert(${target.className} ${target.lowerStartName}) throws SQLException;
 
     ${target.className} selectById(Long id) throws SQLException;
 

@@ -18,7 +18,7 @@
     </template>
     <template type="daoImpl">
         <templateName>dao/impl/daoImpl.vm</templateName>
-        <targetFileName replacement="{className}" replaceWith="className">/dao/impl/{className}DAOImpl</targetFileName>
+        <targetFileName replacement="{className}" replaceWith="className">/dao/impl/{className}DAOImpl.java</targetFileName>
     </template>
     <template type="service">
         <templateName>service/service.vm</templateName>

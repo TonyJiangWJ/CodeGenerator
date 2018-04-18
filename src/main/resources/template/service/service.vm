@@ -18,7 +18,7 @@ public interface ${target.className}Service {
     Long insert(@ServiceParam("$target.lowerStartName") $target.className $target.lowerStartName) throws SQLException;
 
     @Service(functionId = "", desc = "更新")
-    Integer updateById((@ServiceParam("$target.lowerStartName") $target.className $target.lowerStartName) throws SQLException;
+    Integer updateById(@ServiceParam("$target.lowerStartName") $target.className $target.lowerStartName) throws SQLException;
 
     @Service(functionId = "", desc = "根据id获取")
     ${target.className} selectById(@ServiceParam("id") Long id) throws SQLException;
@@ -27,5 +27,5 @@ public interface ${target.className}Service {
     List<${target.className}> listByCondition(@ServiceParam("condition") ${target.className} condition) throws SQLException;
 
     @Service(functionId = "", desc = "分页查询")
-    PageStaticLogQuery queryPages(@ServiceParam("query") ${target.className}Query query) throws SQLException;
+    ${target.className}Query queryPages(@ServiceParam("query") ${target.className}Query query) throws SQLException;
 }
