@@ -34,12 +34,12 @@ public class ConfigParser {
     }
 
     private ConfigParser() {
-        InputStream configInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("xml.xml");
+        InputStream configInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("generate-config.xml");
         SAXReader saxReader = new SAXReader();
         try {
             document = saxReader.read(configInputStream);
         } catch (DocumentException e) {
-            logger.error("初始化读取XML配置信息失败");
+            logger.error("初始化读取XML配置信息失败", e);
         }
         if (document != null) {
             root = document.getRootElement();
@@ -76,6 +76,7 @@ public class ConfigParser {
 
         config.setHost(getValueByTagName("host", jdbcConfig));
         config.setPort(getValueByTagName("port", jdbcConfig));
+        config.setDatabase(getValueByTagName("database", jdbcConfig));
         config.setUserName(getValueByTagName("userName", jdbcConfig));
         config.setPassword(getValueByTagName("password", jdbcConfig));
 
