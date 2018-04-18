@@ -1,17 +1,15 @@
 package com.tony.model;
 
+import com.tony.config.ConfigInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author jiangwj20966 2018/4/18
  */
-public class TargetClass {
+public class TargetClass extends ConfigInfo {
 
-    private String packageName;
-    private String className;
-    private String tableName;
-    private String desc;
     private List<ColumnField> fieldList;
 
     public TargetClass() {
@@ -36,40 +34,12 @@ public class TargetClass {
         return false;
     }
 
+    public String getLowerStartName() {
+        return getClassName().substring(0, 1).toLowerCase() + getClassName().substring(1);
+    }
+
     public String getFullClassName() {
-        return packageName + "." + className;
-    }
-
-    public String getPackageName() {
-        return packageName;
-    }
-
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    public String getTableName() {
-        return tableName;
-    }
-
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
+        return getPackageName() + "." + getClassName();
     }
 
     public List<ColumnField> getFieldList() {

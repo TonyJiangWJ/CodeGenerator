@@ -7,6 +7,9 @@ public class ConfigInfo {
     private String tableName;
     private String className;
     private String packageName;
+    private String queryPackageName;
+    private String servicePackageName;
+    private String daoPackageName;
     private String desc;
 
     public String getTableName() {
@@ -31,6 +34,30 @@ public class ConfigInfo {
 
     public void setPackageName(String packageName) {
         this.packageName = packageName;
+    }
+
+    public String getQueryPackageName() {
+        return queryPackageName;
+    }
+
+    public void setQueryPackageName(String queryPackageName) {
+        this.queryPackageName = queryPackageName;
+    }
+
+    public String getServicePackageName() {
+        return servicePackageName;
+    }
+
+    public void setServicePackageName(String servicePackageName) {
+        this.servicePackageName = servicePackageName;
+    }
+
+    public String getDaoPackageName() {
+        return daoPackageName;
+    }
+
+    public void setDaoPackageName(String daoPackageName) {
+        this.daoPackageName = daoPackageName;
     }
 
     public String getDesc() {

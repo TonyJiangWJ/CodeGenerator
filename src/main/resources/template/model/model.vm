@@ -5,7 +5,7 @@ import java.util.Date;
 #end
 
 /**
- * @author jiangwj20966
+ * @author $configParser.authorInfo
  */
 public class $target.className {
 

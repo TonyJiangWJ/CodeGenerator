@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author jiangwj20966 2018/4/2
  */
-public class Test {
+public class Application {
 
     public static void main(String[] args) throws Exception {
 

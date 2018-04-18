@@ -10,7 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +23,12 @@ public class ConfigParser {
     private Element root;
     private Document document;
     private static Logger logger = LoggerFactory.getLogger(ConfigParser.class);
+
+    private List<ConfigInfo> configInfos;
+    private JdbcConfig jdbcConfig;
+    private String filePath;
+
+    private String authorInfo;
 
     public static ConfigParser getInstance() {
         if (INSTANCE == null) {
@@ -48,43 +56,60 @@ public class ConfigParser {
     }
 
     public List<ConfigInfo> getConfigs() {
-        Logger logger = LoggerFactory.getLogger(ConfigParser.class);
+        if (configInfos == null) {
+            try {
+                configInfos = new ArrayList<>();
+                Element child;
+                ConfigInfo config;
+                for (Object e : root.elements("config")) {
+                    child = (Element) e;
+                    config = new ConfigInfo();
+                    config.setPackageName(getValueByTagName("packageName", child));
+                    config.setQueryPackageName(getValueByTagName("queryPackageName", child));
+                    config.setServicePackageName(getValueByTagName("servicePackageName", child));
+                    config.setDaoPackageName(getValueByTagName("daoPackageName", child));
 
-        try {
-            List<ConfigInfo> configInfos = new ArrayList<>();
-            Element child;
-            ConfigInfo config;
-            for (Object e : root.elements("config")) {
-                child = (Element) e;
-                config = new ConfigInfo();
-                config.setPackageName(getValueByTagName("packageName", child));
-                config.setClassName(getValueByTagName("className", child));
-                config.setDesc(getValueByTagName("desc", child));
-                config.setTableName(getValueByTagName("tableName", child));
-                configInfos.add(config);
+                    config.setClassName(getValueByTagName("className", child));
+                    config.setDesc(getValueByTagName("desc", child));
+                    config.setTableName(getValueByTagName("tableName", child));
+                    configInfos.add(config);
+                }
+                return configInfos;
+            } catch (Exception e) {
+                logger.error("读取配置信息失败", e);
             }
-            return configInfos;
-        } catch (Exception e) {
-            logger.error("读取配置信息失败", e);
         }
-        return null;
+        return configInfos;
     }
 
     public JdbcConfig getJdbcConfig() {
-        JdbcConfig config = new JdbcConfig();
-        Element jdbcConfig = root.element("jdbcConfig");
+        if (jdbcConfig == null) {
+            Element jdbcConfigTag = root.element("jdbcConfig");
+            jdbcConfig = new JdbcConfig();
 
-        config.setHost(getValueByTagName("host", jdbcConfig));
-        config.setPort(getValueByTagName("port", jdbcConfig));
-        config.setDatabase(getValueByTagName("database", jdbcConfig));
-        config.setUserName(getValueByTagName("userName", jdbcConfig));
-        config.setPassword(getValueByTagName("password", jdbcConfig));
+            jdbcConfig.setHost(getValueByTagName("host", jdbcConfigTag));
+            jdbcConfig.setPort(getValueByTagName("port", jdbcConfigTag));
+            jdbcConfig.setDatabase(getValueByTagName("database", jdbcConfigTag));
+            jdbcConfig.setUserName(getValueByTagName("userName", jdbcConfigTag));
+            jdbcConfig.setPassword(getValueByTagName("password", jdbcConfigTag));
 
-        return config;
+        }
+        return jdbcConfig;
     }
 
     public String getFilePath() {
-        return getValueByTagName("filePath", root);
+        if (filePath == null) {
+            filePath = getValueByTagName("filePath", root);
+        }
+        return filePath;
+    }
+
+    public String getAuthorInfo() {
+        if (authorInfo == null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            authorInfo = getValueByTagName("authorInfo", root) + " " + sdf.format(new Date());
+        }
+        return authorInfo;
     }
 
     private static String getValueByTagName(String tagName, Element element) {
@@ -92,6 +117,6 @@ public class ConfigParser {
         if (child != null) {
             return child.getStringValue();
         }
-        return null;
+        return "";
     }
 }

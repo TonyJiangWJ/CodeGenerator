@@ -2,6 +2,7 @@ package com.tony.util;
 
 import com.tony.VelocityParser;
 import com.tony.config.ConfigInfo;
+import com.tony.config.TemplatePathConfig;
 import com.tony.model.TargetClass;
 
 import java.util.HashMap;
@@ -11,32 +12,26 @@ import java.util.Map;
  * @author jiangwj20966 2018/4/18
  */
 public class GenerateUtil {
-    private static TargetClass targetClass;
-    private static VelocityParser parser;
-    private static ConfigInfo configInfo;
     private static String filePath = ConfigParser.getInstance().getFilePath();
 
 
     public static void generateAll(ConfigInfo configInfo) {
-        targetClass = ColumnInfoGetUtil.getInstance().getClassInfoWithRemarksByTableName(configInfo);
-        parser = new VelocityParser();
-        GenerateUtil.configInfo = configInfo;
-        generateModel();
-        generateSQL();
-    }
-
-    private static void generateSQL() {
-        Map<String, Object> params = new HashMap<>();
+        TargetClass targetClass = ColumnInfoGetUtil.getInstance().getClassInfoWithRemarksByTableName(configInfo);
+        VelocityParser parser = new VelocityParser();
+        Map<String, Object> params = new HashMap<>(1);
         params.put("target", targetClass);
-        parser.writePage(params, "/sqlmap/ibatis_sqlmap.vm", filePath, "sqlMap/" + configInfo.getDesc() + "_SqlMap.xml");
+        for (TemplatePathConfig config : TemplateConfigParser.getInstance().getTemplatePathConfigs()) {
+            parser.writePage(params, config.getTemplateName(), filePath, getFileName(config, configInfo));
+        }
     }
 
-    private static void generateModel() {
-        Map<String, Object> params = new HashMap<>();
-        params.put("target", targetClass);
-        parser.writePage(params, "/model/model.vm", filePath, "model/" + configInfo.getClassName() + ".java");
+    private static String getFileName(TemplatePathConfig config, ConfigInfo configInfo) {
+        if ("desc".equals(config.getReplaceWith())) {
+            return config.getTargetFileName().replace(config.getReplacement(), configInfo.getDesc());
+        } else {
+            return config.getTargetFileName().replace(config.getReplacement(), configInfo.getClassName());
+        }
     }
-
 
 }
 

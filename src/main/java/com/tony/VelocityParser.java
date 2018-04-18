@@ -1,5 +1,7 @@
 package com.tony;
 
+import com.tony.util.ConfigParser;
+import com.tony.util.TemplateConfigParser;
 import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -34,12 +36,13 @@ public class VelocityParser {
 
     private VelocityEngine velocityEngine;
 
-    private String templatePath = "/template/";
+    private String templatePath;
 
     /**
      * 初始化velocity引擎
      */
     private void init() {
+        templatePath = TemplateConfigParser.getInstance().getTemplatePath();
         logger = LoggerFactory.getLogger(VelocityParser.class);
         try {
             Properties properties = new Properties();
@@ -83,7 +86,7 @@ public class VelocityParser {
         try {
             VelocityContext context = buildContext(params);
 //            buildComplexAttribute(context);
-//            setCommonObjects(context);
+            setCommonObjects(context);
             String targetFilePath = targetPath + File.separator + fileName;
             File target = new File(targetFilePath);
             boolean flowFlag = true;
@@ -146,10 +149,14 @@ public class VelocityParser {
      * @param key     变量名
      * @param value   内容
      */
-    protected void checkAndPutContext(VelocityContext context, String key, Object value) {
+    private void checkAndPutContext(VelocityContext context, String key, Object value) {
         if (context.containsKey(key)) {
             logger.warn("velocityContext中已经存在键值：{}，原有内容将被覆盖", key);
         }
         context.put(key, value);
+    }
+
+    private void setCommonObjects(VelocityContext context) {
+        context.put("configParser", ConfigParser.getInstance());
     }
 }

@@ -1,0 +1,22 @@
+package $target.daoPackageName;
+
+import $target.fullClassName;
+import ${target.queryPackageName}.${target.className}Query;
+
+import java.sql.SQLException;
+import java.util.List;
+
+/**
+* @author $configParser.authorInfo
+*/
+public interface ${target.className}DAO {
+    Long insert(${target.className} log) throws SQLException;
+
+    ${target.className} selectById(Long id) throws SQLException;
+
+    Integer updateById(${target.className} log) throws SQLException;
+
+    List<${target.className}> listByCondition(${target.className} condition) throws SQLException;
+
+    ${target.className}Query queryLogByPage(${target.className}Query query) throws SQLException;
+}

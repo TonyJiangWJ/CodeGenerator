@@ -6,6 +6,7 @@ import com.tony.model.ColumnField;
 import com.tony.model.TargetClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -86,10 +87,7 @@ public class ColumnInfoGetUtil {
         try {
             ResultSet rs = connection.getMetaData().getColumns(null, connection.getSchema(), config.getTableName().toUpperCase(), "%");
             TargetClass targetClass = new TargetClass();
-            targetClass.setTableName(config.getTableName());
-            targetClass.setPackageName(config.getPackageName());
-            targetClass.setClassName(config.getClassName());
-            targetClass.setDesc(config.getDesc());
+            BeanUtils.copyProperties(config, targetClass);
             while (rs.next()) {
                 ColumnField field = new ColumnField();
                 field.setColumn(rs.getString("COLUMN_NAME"));
