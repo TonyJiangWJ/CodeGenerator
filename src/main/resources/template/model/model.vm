@@ -1,0 +1,32 @@
+package $target.packageName;
+
+#if($target.containsType('Date'))
+import java.util.Date;
+#end
+
+/**
+ * @author jiangwj20966
+ */
+public class $target.className {
+
+#foreach($field in $target.fieldList)
+#if("$field.remarks"!="")
+    /**
+     * $field.remarks
+     */
+#end
+    private $field.javaType $field.property;
+#end
+
+#foreach($field in $target.fieldList)
+
+    public $field.javaType get${field.propertyMethodName}() {
+        return $field.property;
+    }
+
+    public void set${field.propertyMethodName}(${field.javaType} $field.property) {
+        this.$field.property = $field.property;
+    }
+#end
+
+}
