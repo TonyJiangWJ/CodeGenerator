@@ -3,7 +3,7 @@ package ${target.servicePackageName}.impl;
 import ${target.daoPackageName}.${target.className}DAO;
 import ${target.fullClassName};
 import ${target.queryPackageName}.${target.className}Query;
-import ${target.servicePackageName}.${target.className}Service;
+import ${target.serviceApiPackageName}.${target.className}Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,13 +22,13 @@ public class ${target.className}ServiceImpl implements ${target.className}Servic
     @Override
     @Transactional
     public Long insert(${target.className} ${target.lowerStartName}) throws SQLException {
-        return ${target.lowerStartName}DAO.insert(log);
+        return ${target.lowerStartName}DAO.insert(${target.lowerStartName});
     }
 
     @Transactional
     @Override
-    public Integer updateById(${target.className} log) throws SQLException {
-        return ${target.lowerStartName}DAO.updateById(log);
+    public Integer updateById(${target.className} ${target.lowerStartName}) throws SQLException {
+        return ${target.lowerStartName}DAO.updateById(${target.lowerStartName});
     }
 
     @Override

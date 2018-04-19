@@ -21,7 +21,7 @@ public class GenerateUtil {
         Map<String, Object> params = new HashMap<>(1);
         params.put("target", targetClass);
         for (TemplatePathConfig config : TemplateConfigParser.getInstance().getTemplatePathConfigs()) {
-            parser.writePage(params, config.getTemplateName(), filePath, getFileName(config, configInfo));
+            parser.writePage(params, config, filePath, getFileName(config, configInfo));
         }
     }
 

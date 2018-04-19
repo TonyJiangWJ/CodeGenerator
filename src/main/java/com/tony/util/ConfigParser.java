@@ -2,6 +2,7 @@ package com.tony.util;
 
 import com.tony.config.ConfigInfo;
 import com.tony.config.JdbcConfig;
+import com.tony.enums.EnumXmlTagNames;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -61,17 +62,18 @@ public class ConfigParser {
                 configInfos = new ArrayList<>();
                 Element child;
                 ConfigInfo config;
-                for (Object e : root.elements("config")) {
+                for (Object e : root.elements(EnumXmlTagNames.CONFIG.getTagName())) {
                     child = (Element) e;
                     config = new ConfigInfo();
-                    config.setPackageName(getValueByTagName("packageName", child));
-                    config.setQueryPackageName(getValueByTagName("queryPackageName", child));
-                    config.setServicePackageName(getValueByTagName("servicePackageName", child));
-                    config.setDaoPackageName(getValueByTagName("daoPackageName", child));
+                    config.setPackageName(getValueByTagName(EnumXmlTagNames.PACKAGE_NAME.getTagName(), child));
+                    config.setQueryPackageName(getValueByTagName(EnumXmlTagNames.QUERY_PACKAGE_NAME.getTagName(), child));
+                    config.setServicePackageName(getValueByTagName(EnumXmlTagNames.SERVICE_PACKAGE_NAME.getTagName(), child));
+                    config.setServiceApiPackageName(getValueByTagName(EnumXmlTagNames.SERVICE_API_PACKAGE_NAME.getTagName(), child));
+                    config.setDaoPackageName(getValueByTagName(EnumXmlTagNames.DAO_PACKAGE_NAME.getTagName(), child));
 
-                    config.setClassName(getValueByTagName("className", child));
-                    config.setDesc(getValueByTagName("desc", child));
-                    config.setTableName(getValueByTagName("tableName", child));
+                    config.setClassName(getValueByTagName(EnumXmlTagNames.CLASS_NAME.getTagName(), child));
+                    config.setDesc(getValueByTagName(EnumXmlTagNames.DESC_NAME.getTagName(), child));
+                    config.setTableName(getValueByTagName(EnumXmlTagNames.TABLE_NAME.getTagName(), child));
                     configInfos.add(config);
                 }
                 return configInfos;
@@ -84,14 +86,14 @@ public class ConfigParser {
 
     public JdbcConfig getJdbcConfig() {
         if (jdbcConfig == null) {
-            Element jdbcConfigTag = root.element("jdbcConfig");
+            Element jdbcConfigTag = root.element(EnumXmlTagNames.JDBC_CONFIG.getTagName());
             jdbcConfig = new JdbcConfig();
 
-            jdbcConfig.setHost(getValueByTagName("host", jdbcConfigTag));
-            jdbcConfig.setPort(getValueByTagName("port", jdbcConfigTag));
-            jdbcConfig.setDatabase(getValueByTagName("database", jdbcConfigTag));
-            jdbcConfig.setUserName(getValueByTagName("userName", jdbcConfigTag));
-            jdbcConfig.setPassword(getValueByTagName("password", jdbcConfigTag));
+            jdbcConfig.setHost(getValueByTagName(EnumXmlTagNames.JDBC_HOST.getTagName(), jdbcConfigTag));
+            jdbcConfig.setPort(getValueByTagName(EnumXmlTagNames.JDBC_PORT.getTagName(), jdbcConfigTag));
+            jdbcConfig.setDatabase(getValueByTagName(EnumXmlTagNames.JDBC_DATABASE.getTagName(), jdbcConfigTag));
+            jdbcConfig.setUserName(getValueByTagName(EnumXmlTagNames.JDBC_USER_NAME.getTagName(), jdbcConfigTag));
+            jdbcConfig.setPassword(getValueByTagName(EnumXmlTagNames.JDBC_PASSWORD.getTagName(), jdbcConfigTag));
 
         }
         return jdbcConfig;
@@ -99,7 +101,7 @@ public class ConfigParser {
 
     public String getFilePath() {
         if (filePath == null) {
-            filePath = getValueByTagName("filePath", root);
+            filePath = getValueByTagName(EnumXmlTagNames.FILE_PATH.getTagName(), root);
         }
         return filePath;
     }
@@ -107,7 +109,7 @@ public class ConfigParser {
     public String getAuthorInfo() {
         if (authorInfo == null) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-            authorInfo = getValueByTagName("authorInfo", root) + " " + sdf.format(new Date());
+            authorInfo = getValueByTagName(EnumXmlTagNames.AUTHOR_INFO.getTagName(), root) + " " + sdf.format(new Date());
         }
         return authorInfo;
     }

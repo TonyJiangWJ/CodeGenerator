@@ -1,4 +1,4 @@
-package $target.servicePackageName;
+package $target.serviceApiPackageName;
 
 import $target.fullClassName;
 import ${target.queryPackageName}.${target.className}Query;

@@ -1,5 +1,6 @@
 package com.tony;
 
+import com.tony.config.TemplatePathConfig;
 import com.tony.util.ConfigParser;
 import com.tony.util.TemplateConfigParser;
 import org.apache.commons.lang.StringUtils;
@@ -24,11 +25,6 @@ import java.util.Properties;
 public class VelocityParser {
 
     private Logger logger;
-
-    public static void main(String[] args) {
-        VelocityParser parser = new VelocityParser();
-        parser.writePage(null, "sqlmap/ibatis_sqlmap.vm", "d:/testsql", "test.xml");
-    }
 
     public VelocityParser() {
         init();
@@ -68,13 +64,14 @@ public class VelocityParser {
     /**
      * 输出静态化文件
      *
-     * @param params       赋值到模板的参数
-     * @param templateName 模板路径名
-     * @param targetPath   配置的目标文件路径
-     * @param fileName     目标文件名称
+     * @param params     赋值到模板的参数
+     * @param configInfo 模板配置信息
+     * @param targetPath 配置的目标文件路径
+     * @param fileName   目标文件名称
      */
-    public void writePage(Map<String, Object> params, String templateName, String targetPath, String fileName) {
+    public void writePage(Map<String, Object> params, TemplatePathConfig configInfo, String targetPath, String fileName) {
 
+        String templateName = configInfo.getTemplateName();
         if (velocityEngine == null) {
             throw new IllegalStateException("velocityEngine未初始化");
         }
@@ -98,7 +95,7 @@ public class VelocityParser {
                 fileOutputStream = new FileOutputStream(target);
                 writer = new BufferedWriter(new OutputStreamWriter(fileOutputStream, "UTF-8"));
                 template.merge(context, writer);
-                logger.info("页面生成成功，targetPath:{}", target.getAbsolutePath());
+                logger.info("{}页面生成成功，targetPath:{}", configInfo.getType(), target.getAbsolutePath());
             } else {
                 logger.error("路径生成失败！");
                 throw new IllegalStateException("生成静态化页面失败，路径生成失败！");

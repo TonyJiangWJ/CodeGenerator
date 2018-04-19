@@ -1,6 +1,8 @@
 package com.tony.util;
 
 import com.tony.config.TemplatePathConfig;
+import com.tony.enums.EnumXmlAttrNames;
+import com.tony.enums.EnumXmlTagNames;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -53,14 +55,14 @@ public class TemplateConfigParser {
                 templatePathConfigs = new ArrayList<>();
                 Element child;
                 TemplatePathConfig config;
-                for (Object e : root.elements("template")) {
+                for (Object e : root.elements(EnumXmlTagNames.TEMPLATE.getTagName())) {
                     child = (Element) e;
                     config = new TemplatePathConfig();
-                    config.setReplacement(getAttrValueWithTag("targetFileName", "replacement", child));
-                    config.setReplaceWith(getAttrValueWithTag("targetFileName", "replaceWith", child));
-                    config.setTargetFileName(getValueByTagName("targetFileName", child));
-                    config.setTemplateName(getValueByTagName("templateName", child));
-                    config.setType(getAttrValue("type", child));
+                    config.setReplacement(getAttrValueWithTag(EnumXmlTagNames.TARGET_FILE_NAME.getTagName(), EnumXmlAttrNames.REPLACEMENT.getAttrName(), child));
+                    config.setReplaceWith(getAttrValueWithTag(EnumXmlTagNames.TARGET_FILE_NAME.getTagName(), EnumXmlAttrNames.REPLACE_WITH.getAttrName(), child));
+                    config.setTargetFileName(getValueByTagName(EnumXmlTagNames.TARGET_FILE_NAME.getTagName(), child));
+                    config.setTemplateName(getValueByTagName(EnumXmlTagNames.TEMPLATE_NAME.getTagName(), child));
+                    config.setType(getAttrValue(EnumXmlAttrNames.TYPE.getAttrName(), child));
                     templatePathConfigs.add(config);
                 }
             } catch (Exception e) {
@@ -72,7 +74,7 @@ public class TemplateConfigParser {
 
     public String getTemplatePath() {
         if (templatePath == null) {
-            templatePath = getAttrValue("templatePath", root);
+            templatePath = getAttrValue(EnumXmlAttrNames.TEMPLATE_PATH.getAttrName(), root);
         }
         return templatePath;
     }

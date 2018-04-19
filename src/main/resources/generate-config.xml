@@ -14,6 +14,7 @@
         <packageName>com.hundsun.emall.model.form</packageName>
         <queryPackageName>com.hundsun.emall.query.form</queryPackageName>
         <servicePackageName>com.hundsun.emall.service.form</servicePackageName>
+        <serviceApiPackageName>com.hundsun.emall.service.api.form</serviceApiPackageName>
         <daoPackageName>com.hundsun.emall.dao.form</daoPackageName>
         <desc>EMALL_FORM_ATTR</desc>
         <tableName>EMALL_FORM_ATTR</tableName>

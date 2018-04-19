@@ -9,6 +9,7 @@ public class ConfigInfo {
     private String packageName;
     private String queryPackageName;
     private String servicePackageName;
+    private String serviceApiPackageName;
     private String daoPackageName;
     private String desc;
 
@@ -50,6 +51,14 @@ public class ConfigInfo {
 
     public void setServicePackageName(String servicePackageName) {
         this.servicePackageName = servicePackageName;
+    }
+
+    public String getServiceApiPackageName() {
+        return serviceApiPackageName;
+    }
+
+    public void setServiceApiPackageName(String serviceApiPackageName) {
+        this.serviceApiPackageName = serviceApiPackageName;
     }
 
     public String getDaoPackageName() {
