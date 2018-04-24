@@ -1,48 +1,11 @@
 package ${target.servicePackageName}.impl;
 
-import ${target.daoPackageName}.${target.className}DAO;
-import ${target.fullClassName};
-import ${target.queryPackageName}.${target.className}Query;
-import ${target.serviceApiPackageName}.${target.className}Service;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.tony.billing.service.${target.className}Service;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.sql.SQLException;
-import java.util.List;
-
 /**
 * @author $configParser.authorInfo
 */
 @Service
 public class ${target.className}ServiceImpl implements ${target.className}Service {
-    @Autowired
-    private ${target.className}DAO ${target.lowerStartName}DAO;
 
-    @Override
-    @Transactional
-    public Long insert(${target.className} ${target.lowerStartName}) throws SQLException {
-        return ${target.lowerStartName}DAO.insert(${target.lowerStartName});
-    }
-
-    @Transactional
-    @Override
-    public Integer updateById(${target.className} ${target.lowerStartName}) throws SQLException {
-        return ${target.lowerStartName}DAO.updateById(${target.lowerStartName});
-    }
-
-    @Override
-    public ${target.className} selectById(Long id) throws SQLException {
-        return ${target.lowerStartName}DAO.selectById(id);
-    }
-
-    @Override
-    public List<${target.className}> listByCondition(${target.className} condition) throws SQLException {
-        return ${target.lowerStartName}DAO.listByCondition(condition);
-    }
-
-    @Override
-    public ${target.className}Query queryPages(${target.className}Query query) throws SQLException {
-        return ${target.lowerStartName}DAO.queryLogByPage(query);
-    }
 }

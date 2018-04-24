@@ -19,4 +19,34 @@
         <desc>t_asset</desc>
         <tableName>t_asset_type</tableName>
     </config>
+    <config>
+        <className>AssetParentType</className>
+        <packageName>com.tony.billing.entity</packageName>
+        <queryPackageName>com.tony.billing.entity.query</queryPackageName>
+        <servicePackageName>com.tony.billing.service.impl</servicePackageName>
+        <serviceApiPackageName>com.tony.billing.service</serviceApiPackageName>
+        <daoPackageName>com.tony.billing.dao</daoPackageName>
+        <desc>AssetParentType</desc>
+        <tableName>t_asset_parent_type</tableName>
+    </config>
+    <config>
+        <className>LiabilityParentType</className>
+        <packageName>com.tony.billing.entity</packageName>
+        <queryPackageName>com.tony.billing.entity.query</queryPackageName>
+        <servicePackageName>com.tony.billing.service.impl</servicePackageName>
+        <serviceApiPackageName>com.tony.billing.service</serviceApiPackageName>
+        <daoPackageName>com.tony.billing.dao</daoPackageName>
+        <desc>LiabilityParentType</desc>
+        <tableName>t_liability_parent_type</tableName>
+    </config>
+    <config>
+        <className>LiabilityType</className>
+        <packageName>com.tony.billing.entity</packageName>
+        <queryPackageName>com.tony.billing.entity.query</queryPackageName>
+        <servicePackageName>com.tony.billing.service.impl</servicePackageName>
+        <serviceApiPackageName>com.tony.billing.service</serviceApiPackageName>
+        <daoPackageName>com.tony.billing.dao</daoPackageName>
+        <desc>LiabilityType</desc>
+        <tableName>t_liability_type</tableName>
+    </config>
 </configs>

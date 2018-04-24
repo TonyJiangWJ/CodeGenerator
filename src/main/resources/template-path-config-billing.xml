@@ -20,4 +20,12 @@
         <templateName>billing/dao/impl/daoImpl.vm</templateName>
         <targetFileName replacement="{className}" replaceWith="className">/dao/impl/{className}DaoImpl.java</targetFileName>
     </template>
+    <template type="service">
+        <templateName>billing/service/service.vm</templateName>
+        <targetFileName replacement="{className}" replaceWith="className">/service/{className}Service.java</targetFileName>
+    </template>
+    <template type="serviceImpl">
+        <templateName>billing/service/impl/serviceImpl.vm</templateName>
+        <targetFileName replacement="{className}" replaceWith="className">/service/impl/{className}ServiceImpl.java</targetFileName>
+    </template>
 </templates>
