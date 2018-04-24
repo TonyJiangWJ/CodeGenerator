@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates templatePath="/template/">
+    <template type="sqlMap">
+        <templateName>billing/sqlmap/mybatis_sqlmap.vm</templateName>
+        <targetFileName replacement="{desc}" replaceWith="desc">/sqlMap/{desc}_SqlMap.xml</targetFileName>
+    </template>
+    <template type="model">
+        <templateName>billing/model/model.vm</templateName>
+        <targetFileName replacement="{className}" replaceWith="className">/entity/{className}.java</targetFileName>
+    </template>
+    <template type="dao">
+        <templateName>billing/dao/dao.vm</templateName>
+        <targetFileName replacement="{className}" replaceWith="className">/dao/{className}Dao.java</targetFileName>
+    </template>
+    <template type="mapper">
+        <templateName>billing/dao/mapper/mapper.vm</templateName>
+        <targetFileName replacement="{className}" replaceWith="className">/dao/mapper/{className}Mapper.java</targetFileName>
+    </template>
+    <template type="daoImpl">
+        <templateName>billing/dao/impl/daoImpl.vm</templateName>
+        <targetFileName replacement="{className}" replaceWith="className">/dao/impl/{className}DaoImpl.java</targetFileName>
+    </template>
+</templates>

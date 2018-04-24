@@ -18,5 +18,5 @@ public interface ${target.className}DAO {
 
     List<${target.className}> listByCondition(${target.className} condition) throws SQLException;
 
-    ${target.className}Query queryLogByPage(${target.className}Query query) throws SQLException;
+    ${target.className}Query queryByPagination(${target.className}Query query) throws SQLException;
 }

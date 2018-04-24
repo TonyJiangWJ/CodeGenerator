@@ -1,0 +1,22 @@
+package $target.daoPackageName;
+
+import $target.fullClassName;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @author $configParser.authorInfo
+ */
+public interface ${target.className}Dao {
+
+    Long insert(${target.className} ${target.lowerStartName});
+
+    ${target.className} getById(Long id);
+
+    Integer update(${target.className} log);
+
+    List<${target.className}> list(${target.className} condition);
+
+    List<${target.className}> page(Map params);
+}

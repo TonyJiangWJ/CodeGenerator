@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="${target.daoPackage}.mapper.${target.className}Mapper">
+    <sql id="all">
+#foreach($field in $target.fieldList)
+        $field.column $field.property,
+#end
+    </sql>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.tony.billing.entity.Asset">
+        INSERT INTO ${target.tableName} (
+        <trim suffixOverrides=",">
+#foreach($field in $target.fieldList)
+            <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
+                $field.column,
+            </if>
+#end
+        </trim>
+        ) VALUES (
+        <trim suffixOverrides=",">
+#foreach($field in $target.fieldList)
+                <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
+                    #{$field.property,jdbcType=${filed.jdbcType},
+                </if>
+#end
+        </trim>
+        )
+    </insert>
+    <update id="update" parameterType="com.tony.billing.entity.Asset">
+        UPDATE ${target.tableName}
+        <trim prefix="SET" suffixOverrides=",">
+#foreach($field in $target.fieldList)
+                <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
+                    ${field.column}=#{$field.property,jdbcType=${filed.jdbcType},
+                </if>
+#end
+        </trim>
+        WHERE id=#{id, jdbcType=BIGINT}
+    </update>
+    <select id="page" parameterType="java.util.Map" resultType="com.tony.billing.entity.Asset">
+        SELECT
+        <include refid="all"/>
+        FROM ${target.tableName}
+        <trim prefix="WHERE" prefixOverrides="and">
+#foreach($field in $target.fieldList)
+            <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
+                and ${field.column}=#{$field.property,jdbcType=${filed.jdbcType},
+            </if>
+#end
+        </trim>
+        ORDER BY
+        <if test="orderBy != null">
+            \${orderBy} \${sort}
+        </if>
+        <if test="orderBy == null or orderBy == '' ">
+            id \${sort}
+        </if>
+        LIMIT #{index} , #{offset}
+    </select>
+
+    <select id="list" parameterType="com.tony.billing.entity.Asset" resultType="com.tony.billing.entity.Asset">
+        SELECT
+        <include refid="all"/>
+        FROM ${target.tableName}
+        <trim prefix="WHERE" prefixOverrides="and">
+#foreach($field in $target.fieldList)
+            <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
+                and ${field.column}=#{$field.property,jdbcType=${filed.jdbcType},
+            </if>
+#end
+        </trim>
+    </select>
+
+    <select id="getById" parameterType="Long" resultType="com.tony.billing.entity.Asset">
+        SELECT
+        <include refid="all"/>
+        FROM ${target.tableName} WHERE id=#{id,jdbcType=BIGINT}
+    </select>
+</mapper>

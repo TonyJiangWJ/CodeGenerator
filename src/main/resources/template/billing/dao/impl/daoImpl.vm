@@ -1,0 +1,51 @@
+package ${target.daoPackageName}.impl;
+
+import com.google.common.base.Preconditions;
+import $target.fullClassName;
+import ${target.daoPackageName}.${target.className}Dao;
+import ${target.daoPackageName}.mapper.${target.className}Mapper;
+import org.springframework.stereotype.Repository;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+/**
+* @author $configParser.authorInfo
+*/
+@Repository
+public class ${target.className}DaoImpl implements ${target.className}Dao {
+
+    @Resource
+    private ${target.className}Mapper ${target.lowerStartName}Mapper;
+
+    @Override
+    public Long insert(${target.className} ${target.lowerStartName}) {
+        ${target.lowerStartName}.setCreateTime(new Date());
+        ${target.lowerStartName}.setModifyTime(new Date());
+        return ${target.lowerStartName}Mapper.insert(${target.lowerStartName});
+    }
+
+    @Override
+    public Integer update(${target.className} ${target.lowerStartName}) {
+        ${target.lowerStartName}.setModifyTime(new Date());
+        return ${target.lowerStartName}Mapper.update(${target.lowerStartName});
+    }
+
+    @Override
+    public List<${target.className}> page(Map params) {
+        return ${target.lowerStartName}Mapper.page(params);
+    }
+
+    @Override
+    public List<${target.className}> list(${target.className} ${target.lowerStartName}) {
+        return ${target.lowerStartName}Mapper.list(${target.lowerStartName});
+    }
+
+    @Override
+    public ${target.className} getById(Long id) {
+        return ${target.lowerStartName}Mapper.getById(id);
+    }
+
+}

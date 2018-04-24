@@ -1,0 +1,31 @@
+package $target.serviceApiPackageName;
+
+import $target.fullClassName;
+import ${target.queryPackageName}.${target.className}Query;
+
+import com.hundsun.jresplus.remoting.impl.annotation.Service;
+import com.hundsun.jresplus.remoting.impl.annotation.ServiceModule;
+import com.hundsun.jresplus.remoting.impl.annotation.ServiceParam;
+import java.sql.SQLException;
+import java.util.List;
+
+/**
+ * @author $configParser.authorInfo
+ */
+@ServiceModule
+public interface ${target.className}Service {
+    @Service(functionId = "", desc = "插入")
+    Long insert(@ServiceParam("$target.lowerStartName") $target.className $target.lowerStartName) throws SQLException;
+
+    @Service(functionId = "", desc = "更新")
+    Integer updateById(@ServiceParam("$target.lowerStartName") $target.className $target.lowerStartName) throws SQLException;
+
+    @Service(functionId = "", desc = "根据id获取")
+    ${target.className} selectById(@ServiceParam("id") Long id) throws SQLException;
+
+    @Service(functionId = "", desc = "获取列表")
+    List<${target.className}> listByCondition(@ServiceParam("condition") ${target.className} condition) throws SQLException;
+
+    @Service(functionId = "", desc = "分页查询")
+    ${target.className}Query queryPages(@ServiceParam("query") ${target.className}Query query) throws SQLException;
+}

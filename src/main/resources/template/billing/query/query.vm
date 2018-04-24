@@ -1,0 +1,32 @@
+package $target.queryPackageName;
+
+import $target.fullClassName;
+import com.hundsun.emall.query.BasePageQuery;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+* @author $configParser.authorInfo
+*/
+public class ${target.className}Query extends BasePageQuery {
+
+    private List<${target.className}> items;
+
+
+    @Override
+    public Map<String, String> getParameters() {
+        return null;
+    }
+
+    public List<${target.className}> getItems() {
+        return items;
+    }
+
+    public void setItems(List<${target.className}> items) {
+        this.items = items;
+    }
+
+}

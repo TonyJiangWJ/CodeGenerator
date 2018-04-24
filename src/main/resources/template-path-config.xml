@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates templatePath="/template/">
     <template type="sqlMap">
-        <templateName>sqlmap/ibatis_sqlmap.vm</templateName>
+        <templateName>sqlmap/mybatis_sqlmap.vm</templateName>
         <targetFileName replacement="{desc}" replaceWith="desc">/sqlMap/{desc}_SqlMap.xml</targetFileName>
     </template>
     <template type="model">

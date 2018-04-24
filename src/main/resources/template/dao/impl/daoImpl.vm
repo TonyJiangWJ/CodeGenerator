@@ -43,11 +43,11 @@ public class ${target.className}DAOImpl extends BaseDAO implements ${target.clas
     }
 
     @Override
-    public ${target.className}Query queryLogByPage(${target.className}Query query) throws SQLException {
+    public ${target.className}Query queryByPagination(${target.className}Query query) throws SQLException {
         Integer count = (Integer) getSqlMapClientTemplate().queryForObject(getNamespace() + ".countByQuery", query);
         query.setTotalItem(count);
         if (count > 0) {
-            query.setItems(getSqlMapClientTemplate().queryForList(getNamespace() + ".queryLogPages", query));
+            query.setItems(getSqlMapClientTemplate().queryForList(getNamespace() + ".queryByPagination", query));
         }
         return query;
     }

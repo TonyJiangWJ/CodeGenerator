@@ -43,7 +43,7 @@ public class ConfigParser {
     }
 
     private ConfigParser() {
-        InputStream configInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("generate-config.xml");
+        InputStream configInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("generate-config-billing.xml");
         SAXReader saxReader = new SAXReader();
         try {
             document = saxReader.read(configInputStream);
