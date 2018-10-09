@@ -37,7 +37,7 @@ public class TemplateConfigParser {
     }
 
     private TemplateConfigParser() {
-        InputStream configInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("template-path-config-billing.xml");
+        InputStream configInputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(PropertyHelper.getTemplatePath());
         SAXReader saxReader = new SAXReader();
         try {
             document = saxReader.read(configInputStream);

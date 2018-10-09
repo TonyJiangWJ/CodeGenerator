@@ -43,6 +43,6 @@ public class ${target.className}ServiceImpl implements ${target.className}Servic
 
     @Override
     public ${target.className}Query queryPages(${target.className}Query query) throws SQLException {
-        return ${target.lowerStartName}DAO.queryLogByPage(query);
+        return ${target.lowerStartName}DAO.queryByPagination(query);
     }
 }
