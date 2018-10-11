@@ -14,18 +14,53 @@ import java.util.List;
  */
 @ServiceModule
 public interface ${target.className}Service {
+    /**
+     * 插入数据
+     *
+     * @param $target.lowerStartName
+     * @return 插入后返回id
+     * @throws SQLException
+     */
     @Service(functionId = "", desc = "插入")
     Long insert(@ServiceParam("$target.lowerStartName") $target.className $target.lowerStartName) throws SQLException;
 
+    /**
+     * 根据id更新数据
+     *
+     * @param $target.lowerStartName
+     * @return 更新条数
+     * @throws SQLException
+     */
     @Service(functionId = "", desc = "更新")
     Integer updateById(@ServiceParam("$target.lowerStartName") $target.className $target.lowerStartName) throws SQLException;
 
+    /**
+     * 根据id获取对象
+     *
+     * @param id 对象id
+     * @return 获取到的对象
+     * @throws SQLException
+     */
     @Service(functionId = "", desc = "根据id获取")
     ${target.className} selectById(@ServiceParam("id") Long id) throws SQLException;
 
+    /**
+     * 根据条件获取列表信息
+     *
+     * @param condition 条件属性对象
+     * @return 查询结果列表
+     * @throws SQLException
+     */
     @Service(functionId = "", desc = "获取列表")
     List<${target.className}> listByCondition(@ServiceParam("condition") ${target.className} condition) throws SQLException;
 
+    /**
+     * 根据条件获取分页信息
+     *
+     * @param query 查询条件
+     * @return 查询结果分页信息
+     * @throws SQLException
+     */
     @Service(functionId = "", desc = "分页查询")
     ${target.className}Query queryPages(@ServiceParam("query") ${target.className}Query query) throws SQLException;
 }
