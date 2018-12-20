@@ -1,5 +1,7 @@
 package com.tony.config;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * @author jiangwj20966 2018/4/18
  */
@@ -11,6 +13,7 @@ public class ConfigInfo {
     private String servicePackageName;
     private String serviceApiPackageName;
     private String daoPackageName;
+    private String mapperPackageName;
     private String desc;
 
     public String getTableName() {
@@ -67,6 +70,17 @@ public class ConfigInfo {
 
     public void setDaoPackageName(String daoPackageName) {
         this.daoPackageName = daoPackageName;
+    }
+
+    public String getMapperPackageName() {
+        if (StringUtils.isEmpty(this.mapperPackageName)) {
+            return this.daoPackageName + ".mapper";
+        }
+        return mapperPackageName;
+    }
+
+    public void setMapperPackageName(String mapperPackageName) {
+        this.mapperPackageName = mapperPackageName;
     }
 
     public String getDesc() {

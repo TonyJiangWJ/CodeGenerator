@@ -70,7 +70,7 @@ public class ConfigParser {
                     config.setServicePackageName(getValueByTagName(EnumXmlTagNames.SERVICE_PACKAGE_NAME.getTagName(), child));
                     config.setServiceApiPackageName(getValueByTagName(EnumXmlTagNames.SERVICE_API_PACKAGE_NAME.getTagName(), child));
                     config.setDaoPackageName(getValueByTagName(EnumXmlTagNames.DAO_PACKAGE_NAME.getTagName(), child));
-
+                    config.setMapperPackageName(getValueByTagName(EnumXmlTagNames.MAPPER_PACKAGE_NAME.getTagName(), child));
                     config.setClassName(getValueByTagName(EnumXmlTagNames.CLASS_NAME.getTagName(), child));
                     config.setDesc(getValueByTagName(EnumXmlTagNames.DESC_NAME.getTagName(), child));
                     config.setTableName(getValueByTagName(EnumXmlTagNames.TABLE_NAME.getTagName(), child));

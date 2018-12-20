@@ -14,7 +14,7 @@ public interface ${target.className}Dao {
 
     ${target.className} getById(Long id);
 
-    Integer update(${target.className} log);
+    Integer update(${target.className} ${target.lowerStartName});
 
     List<${target.className}> list(${target.className} condition);
 

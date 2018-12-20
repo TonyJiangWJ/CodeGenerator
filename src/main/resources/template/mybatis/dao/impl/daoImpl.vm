@@ -3,7 +3,7 @@ package ${target.daoPackageName}.impl;
 import com.google.common.base.Preconditions;
 import $target.fullClassName;
 import ${target.daoPackageName}.${target.className}Dao;
-import ${target.daoPackageName}.mapper.${target.className}Mapper;
+import ${target.mapperPackageName}.${target.className}Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;

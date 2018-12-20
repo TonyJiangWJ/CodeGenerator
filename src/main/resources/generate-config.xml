@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configs>
     <authorInfo>jiangwj20966</authorInfo>
-    <filePath>D:\Repository\GitHub\CodeGenerator\target\generated\</filePath>
+    <filePath>/Users/jiangwenjie/Documents/Repositories/Github/CodeGenerator/target/generated/</filePath>
     <jdbcConfig>
-        <host></host>
+        <host>127.0.0.1</host>
         <port>3306</port>
-        <database></database>
-        <userName></userName>
+        <database>b2b2c_dp</database>
+        <userName>root</userName>
         <password></password>
     </jdbcConfig>
     <config>
-        <className>EmallFormAttr</className>
-        <packageName>com.hundsun.emall.model.form</packageName>
-        <queryPackageName>com.hundsun.emall.query.form</queryPackageName>
-        <servicePackageName>com.hundsun.emall.service.form</servicePackageName>
-        <serviceApiPackageName>com.hundsun.emall.service.api.form</serviceApiPackageName>
-        <daoPackageName>com.hundsun.emall.dao.form</daoPackageName>
-        <desc>EMALL_FORM_ATTR</desc>
-        <tableName>EMALL_FORM_ATTR</tableName>
+        <className>EmallAttrCategory</className>
+        <packageName>com.hundsun.emall.model.attribute</packageName>
+        <queryPackageName>com.hundsun.emall.query.attribute</queryPackageName>
+        <servicePackageName>com.hundsun.emall.service.attribute</servicePackageName>
+        <serviceApiPackageName>com.hundsun.emall.service.api.attribute</serviceApiPackageName>
+        <daoPackageName>com.hundsun.emall.dao.attribute</daoPackageName>
+        <!-- mapperPackageName可以为空，默认为${daoPackageName}.mapper -->
+        <mapperPackageName>com.hundsun.emall.mapper.attribute</mapperPackageName>
+        <desc>EMALL_ATTR_CATEGORY</desc>
+        <tableName>EMALL_ATTR_CATEGORY</tableName>
     </config>
-
 </configs>

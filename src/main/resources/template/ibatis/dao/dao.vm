@@ -14,7 +14,7 @@ public interface ${target.className}DAO {
 
     ${target.className} selectById(Long id) throws SQLException;
 
-    Integer updateById(${target.className} log) throws SQLException;
+    Integer updateById(${target.className} ${target.lowerStartName}) throws SQLException;
 
     List<${target.className}> listByCondition(${target.className} condition) throws SQLException;
 

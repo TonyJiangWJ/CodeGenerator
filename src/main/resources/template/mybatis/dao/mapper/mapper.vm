@@ -1,4 +1,4 @@
-package ${target.daoPackageName}.mapper;
+package ${target.mapperPackageName};
 
 import $target.fullClassName;
 
@@ -13,7 +13,7 @@ public interface ${target.className}Mapper {
 
     ${target.className} getById(Long id);
 
-    Integer update(${target.className} log);
+    Integer update(${target.className} ${target.lowerStartName});
 
     List<${target.className}> list(${target.className} condition);
 

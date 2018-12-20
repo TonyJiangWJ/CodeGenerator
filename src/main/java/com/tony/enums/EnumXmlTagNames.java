@@ -4,6 +4,9 @@ package com.tony.enums;
  * @author jiangwj20966 2018/4/19
  */
 public enum EnumXmlTagNames {
+    /**
+     *
+     */
     CONFIGS("configs", "配置信息根节点"),
     AUTHOR_INFO("authorInfo", "作者信息"),
     FILE_PATH("filePath", "文件保存路径"),
@@ -20,6 +23,7 @@ public enum EnumXmlTagNames {
     SERVICE_PACKAGE_NAME("servicePackageName", "service包名"),
     SERVICE_API_PACKAGE_NAME("serviceApiPackageName", "service接口包名"),
     DAO_PACKAGE_NAME("daoPackageName", "dao包名"),
+    MAPPER_PACKAGE_NAME("mapperPackageName", "mapper包名"),
     DESC_NAME("desc", "描述SqlMap名称"),
     TABLE_NAME("tableName", "表名"),
     TEMPLATES("templates", "模板配置信息根节点"),
