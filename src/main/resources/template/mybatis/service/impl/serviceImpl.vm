@@ -1,6 +1,6 @@
 package ${target.servicePackageName}.impl;
 
-import com.tony.billing.service.${target.className}Service;
+import ${target.servicePackageName}.${target.className}Service;
 import org.springframework.stereotype.Service;
 /**
 * @author $configParser.authorInfo
