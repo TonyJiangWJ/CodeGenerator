@@ -1,11 +1,16 @@
 package ${target.servicePackageName}.impl;
 
-import ${target.servicePackageName}.${target.className}Service;
+import ${target.daoPackageName}.${target.className}Dao;
+import ${target.serviceApiPackageName}.${target.className}Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 /**
 * @author $configParser.authorInfo
 */
 @Service
 public class ${target.className}ServiceImpl implements ${target.className}Service {
+
+    @Autowired
+    private ${target.className}Dao ${target.lowerStartName}Dao;
 
 }

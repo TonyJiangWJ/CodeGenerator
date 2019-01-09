@@ -2,6 +2,7 @@ package ${target.daoPackageName}.impl;
 
 import com.google.common.base.Preconditions;
 import $target.fullClassName;
+import ${target.queryPackageName}.${target.className}Query;
 import ${target.daoPackageName}.${target.className}Dao;
 import ${target.mapperPackageName}.${target.className}Mapper;
 import org.springframework.stereotype.Repository;
@@ -34,11 +35,6 @@ public class ${target.className}DaoImpl implements ${target.className}Dao {
     }
 
     @Override
-    public List<${target.className}> page(Map params) {
-        return ${target.lowerStartName}Mapper.page(params);
-    }
-
-    @Override
     public List<${target.className}> list(${target.className} ${target.lowerStartName}) {
         return ${target.lowerStartName}Mapper.list(${target.lowerStartName});
     }
@@ -46,6 +42,16 @@ public class ${target.className}DaoImpl implements ${target.className}Dao {
     @Override
     public ${target.className} getById(Long id) {
         return ${target.lowerStartName}Mapper.getById(id);
+    }
+
+    @Override
+    public ${target.className}Query queryByPagination(${target.className}Query query) {
+        Integer count = ${target.lowerStartName}Mapper.countByPagination(query);
+        query.setTotalItem(count);
+        if (count > 0) {
+            query.setItems(${target.lowerStartName}Mapper.pageByPagination(query));
+        }
+        return query;
     }
 
 }

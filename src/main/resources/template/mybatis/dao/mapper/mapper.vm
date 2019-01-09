@@ -1,7 +1,7 @@
 package ${target.mapperPackageName};
 
 import $target.fullClassName;
-
+import ${target.queryPackageName}.${target.className}Query;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +15,10 @@ public interface ${target.className}Mapper {
 
     Integer update(${target.className} ${target.lowerStartName});
 
+    Integer countByQuery(${target.className}Query query);
+
+    List<${target.className}> queryByPagination(${target.className}Query query);
+
     List<${target.className}> list(${target.className} condition);
 
-    List<${target.className}> page(Map params);
 }

@@ -36,25 +36,32 @@
         </trim>
         WHERE id=#{id, jdbcType=BIGINT}
     </update>
-    <select id="page" parameterType="java.util.Map" resultType="com.tony.billing.entity.Asset">
-        SELECT
-        <include refid="all"/>
-        FROM ${target.tableName}
+
+    <sql id="queryWhere">
         <trim prefix="WHERE" prefixOverrides="and">
-#foreach($field in $target.fieldList)
-            <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
-                and ${field.column}=#{$field.property,jdbcType=${filed.jdbcType},
-            </if>
-#end
+            #foreach($field in $target.fieldList)
+                <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
+                    and ${field.column}=#{$field.property,jdbcType=${filed.jdbcType},
+                </if>
+            #end
         </trim>
-        ORDER BY
-        <if test="orderBy != null">
-            ${orderBy} ${sort}
+    </sql>
+    <select id="countByQuery" parameterClass="${target.queryPackageName}.${target.className}Query"
+            resultClass="Integer">
+        SELECT count(*) FROM $target.tableName
+        <include refid="queryWhere"/>
+    </select>
+
+    <select id="queryByPagination" parameterClass="${target.queryPackageName}.${target.className}Query"
+            resultMap="$resultMapName">
+        SELECT * FROM $target.tableName
+        <include refid="queryWhere"/>
+        ORDER BY GMT_MODIFY DESC
+        <if test="mysqlPageFristItem != null and mysqlPageFristItem != ''">
+            <if test="pageSize != null">
+                limit ${mysqlPageFristItem},${pageSize}
+            </if>
         </if>
-        <if test="orderBy == null or orderBy == '' ">
-            id ${sort}
-        </if>
-        LIMIT #{index} , #{offset}
     </select>
 
     <select id="list" parameterType="com.tony.billing.entity.Asset" resultType="com.tony.billing.entity.Asset">

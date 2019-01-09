@@ -8,6 +8,10 @@
         <templateName>mybatis/model/model.vm</templateName>
         <targetFileName replacement="{className}" replaceWith="className">/entity/{className}.java</targetFileName>
     </template>
+    <template type="query">
+        <templateName>mybatis/query/query.vm</templateName>
+        <targetFileName replacement="{className}" replaceWith="className">/query/{className}Query.java</targetFileName>
+    </template>
     <template type="dao">
         <templateName>mybatis/dao/dao.vm</templateName>
         <targetFileName replacement="{className}" replaceWith="className">/dao/{className}Dao.java</targetFileName>

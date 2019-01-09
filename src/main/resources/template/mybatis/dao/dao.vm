@@ -1,7 +1,7 @@
 package $target.daoPackageName;
 
 import $target.fullClassName;
-
+import ${target.queryPackageName}.${target.className}Query;
 import java.util.List;
 import java.util.Map;
 
@@ -18,5 +18,5 @@ public interface ${target.className}Dao {
 
     List<${target.className}> list(${target.className} condition);
 
-    List<${target.className}> page(Map params);
+    ${target.className}Query pageByPagination(${target.className}Query query);
 }
