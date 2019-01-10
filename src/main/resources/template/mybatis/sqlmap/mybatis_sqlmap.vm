@@ -6,7 +6,7 @@
         $field.column $field.property,
 #end
     </sql>
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.tony.billing.entity.Asset">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="$target.fullClassName">
         INSERT INTO ${target.tableName} (
         <trim suffixOverrides=",">
 #foreach($field in $target.fieldList)
@@ -18,20 +18,20 @@
         ) VALUES (
         <trim suffixOverrides=",">
 #foreach($field in $target.fieldList)
-                <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
-                    #{$field.property,jdbcType=${filed.jdbcType},
-                </if>
+            <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
+                #{$field.property,jdbcType=${field.jdbcType}}
+            </if>
 #end
         </trim>
         )
     </insert>
-    <update id="update" parameterType="com.tony.billing.entity.Asset">
+    <update id="update" parameterType="$target.fullClassName">
         UPDATE ${target.tableName}
         <trim prefix="SET" suffixOverrides=",">
 #foreach($field in $target.fieldList)
-                <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
-                    ${field.column}=#{$field.property,jdbcType=${filed.jdbcType},
-                </if>
+            <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
+                ${field.column}=#{$field.property,jdbcType=${field.jdbcType}}
+            </if>
 #end
         </trim>
         WHERE id=#{id, jdbcType=BIGINT}
@@ -39,21 +39,21 @@
 
     <sql id="queryWhere">
         <trim prefix="WHERE" prefixOverrides="and">
-            #foreach($field in $target.fieldList)
-                <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
-                    and ${field.column}=#{$field.property,jdbcType=${filed.jdbcType},
-                </if>
-            #end
+#foreach($field in $target.fieldList)
+            <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
+                and ${field.column}=#{$field.property,jdbcType=${field.jdbcType}}
+            </if>
+#end
         </trim>
     </sql>
-    <select id="countByQuery" parameterClass="${target.queryPackageName}.${target.className}Query"
-            resultClass="Integer">
+    <select id="countByQuery" parameterType="${target.queryPackageName}.${target.className}Query"
+            resultType="Integer">
         SELECT count(*) FROM $target.tableName
         <include refid="queryWhere"/>
     </select>
 
-    <select id="queryByPagination" parameterClass="${target.queryPackageName}.${target.className}Query"
-            resultMap="$resultMapName">
+    <select id="queryByPagination" parameterType="${target.queryPackageName}.${target.className}Query"
+            resultType="${target.fullClassName}">
         SELECT * FROM $target.tableName
         <include refid="queryWhere"/>
         ORDER BY GMT_MODIFY DESC
@@ -64,20 +64,20 @@
         </if>
     </select>
 
-    <select id="list" parameterType="com.tony.billing.entity.Asset" resultType="com.tony.billing.entity.Asset">
+    <select id="list" parameterType="$target.fullClassName" resultType="$target.fullClassName">
         SELECT
         <include refid="all"/>
         FROM ${target.tableName}
         <trim prefix="WHERE" prefixOverrides="and">
 #foreach($field in $target.fieldList)
             <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
-                and ${field.column}=#{$field.property,jdbcType=${filed.jdbcType},
+                and ${field.column}=#{$field.property,jdbcType=${field.jdbcType}}
             </if>
 #end
         </trim>
     </select>
 
-    <select id="getById" parameterType="Long" resultType="com.tony.billing.entity.Asset">
+    <select id="getById" parameterType="Long" resultType="$target.fullClassName">
         SELECT
         <include refid="all"/>
         FROM ${target.tableName} WHERE id=#{id,jdbcType=BIGINT}
