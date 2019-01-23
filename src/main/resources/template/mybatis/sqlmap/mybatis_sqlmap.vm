@@ -23,7 +23,7 @@
             </if>
 #end
         </trim>
-        <trim prefix="VALUES(" suffix=")" prefixOverrides=",">
+        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
 #foreach($field in $target.fieldList)
             <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
                 #{$field.property,jdbcType=${field.jdbcType}},
