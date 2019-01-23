@@ -1,36 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="${target.mapperPackageName}.${target.className}Mapper">
+
+    <resultMap id="${target.className}ResultMap" type="${target.fullClassName}">
+#foreach($field in $target.fieldList)
+        <result property="$field.property" column="$field.column" jdbcType="$field.jdbcType"/>
+#end
+    </resultMap>
+
     <sql id="all">
 #foreach($field in $target.fieldList)
-        $field.column $field.property,
+        $field.column#if($velocityHasNext),#end
+
 #end
     </sql>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="$target.fullClassName">
-        INSERT INTO ${target.tableName} (
-        <trim suffixOverrides=",">
+        INSERT INTO ${target.tableName}
+        <trim prefix="(" suffix=")"  suffixOverrides=",">
 #foreach($field in $target.fieldList)
             <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
                 $field.column,
             </if>
 #end
         </trim>
-        ) VALUES (
-        <trim suffixOverrides=",">
+        <trim prefix="VALUES(" suffix=")" prefixOverrides=",">
 #foreach($field in $target.fieldList)
             <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
-                #{$field.property,jdbcType=${field.jdbcType}}
+                #{$field.property,jdbcType=${field.jdbcType}},
             </if>
 #end
         </trim>
-        )
+        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT LAST_INSERT_ID() as VALUE
+        </selectKey>
     </insert>
     <update id="update" parameterType="$target.fullClassName">
         UPDATE ${target.tableName}
         <trim prefix="SET" suffixOverrides=",">
 #foreach($field in $target.fieldList)
             <if test=" $field.property!=null#if("$field.jdbcType"=='VARCHAR') and $field.property!=''#end">
-                ${field.column}=#{$field.property,jdbcType=${field.jdbcType}}
+                ${field.column}=#{$field.property,jdbcType=${field.jdbcType}},
             </if>
 #end
         </trim>
@@ -53,18 +62,20 @@
     </select>
 
     <select id="queryByPagination" parameterType="${target.queryPackageName}.${target.className}Query"
-            resultType="${target.fullClassName}">
-        SELECT * FROM $target.tableName
+            resultMap="${target.className}ResultMap">
+        SELECT
+        <include refid="all"/>
+        FROM $target.tableName
         <include refid="queryWhere"/>
         ORDER BY GMT_MODIFY DESC
-        <if test="mysqlPageFristItem != null and mysqlPageFristItem != ''">
-            <if test="pageSize != null">
-                limit ${mysqlPageFristItem},${pageSize}
+        <if test="mysqlPageFristItem != null">
+            <if test="pageSize != null and pageSize.toString() != ''">
+                limit #{mysqlPageFristItem},#{pageSize}
             </if>
         </if>
     </select>
 
-    <select id="list" parameterType="$target.fullClassName" resultType="$target.fullClassName">
+    <select id="list" parameterType="$target.fullClassName" resultMap="${target.className}ResultMap">
         SELECT
         <include refid="all"/>
         FROM ${target.tableName}
@@ -77,7 +88,7 @@
         </trim>
     </select>
 
-    <select id="getById" parameterType="Long" resultType="$target.fullClassName">
+    <select id="getById" parameterType="Long" resultMap="${target.className}ResultMap">
         SELECT
         <include refid="all"/>
         FROM ${target.tableName} WHERE id=#{id,jdbcType=BIGINT}

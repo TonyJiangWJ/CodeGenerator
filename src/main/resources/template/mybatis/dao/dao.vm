@@ -18,5 +18,5 @@ public interface ${target.className}Dao {
 
     List<${target.className}> list(${target.className} condition);
 
-    ${target.className}Query pageByPagination(${target.className}Query query);
+    ${target.className}Query queryByPagination(${target.className}Query query);
 }

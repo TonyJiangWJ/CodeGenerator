@@ -45,7 +45,7 @@ public class ${target.className}DaoImpl implements ${target.className}Dao {
     }
 
     @Override
-    public ${target.className}Query pageByPagination(${target.className}Query query) {
+    public ${target.className}Query queryByPagination(${target.className}Query query) {
         Integer count = ${target.lowerStartName}Mapper.countByQuery(query);
         query.setTotalItem(count);
         if (count > 0) {
